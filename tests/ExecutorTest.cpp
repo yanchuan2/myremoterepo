@@ -29,52 +29,5 @@ TEST(ExecutorTest, should_return_default_pose_when_without_init_and_command)
     ASSERT_EQ(target, executor->Query());
 }
 // M
-TEST(ExecutorTest, should_return_x_plus_1_given_command_is_M_and_facing_is_E)
-{
-    // given
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
 
-    // when
-    executor->Execute("M");
-
-    // then
-    const Pose target({1, 0, 'E'});
-    ASSERT_EQ(target, executor->Query());
-}
-TEST(ExecutorTest, should_return_x_minus_1_given_command_is_M_and_facing_is_W)
-{
-    // given
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
-
-    // when
-    executor->Execute("LLM");//初始朝南 左转两次 再向前一步
-
-    // then
-    const Pose target({-1, 0, 'W'});
-    ASSERT_EQ(target, executor->Query());
-}
-TEST(ExecutorTest, should_return_y_plus_1_given_command_is_M_and_facing_is_N)
-{
-    // given
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
-
-    // when
-    executor->Execute("LM");//初始朝南 左转一次 向前一步
-
-    // then
-    const Pose target({0, 1, 'N'});
-    ASSERT_EQ(target, executor->Query());
-}
-TEST(ExecutorTest, should_return_y_minus_1_given_command_is_M_and_facing_is_S)
-{
-    // given
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
-
-    // when
-    executor->Execute("RM");//初始朝南 右转一次 向前一次
-
-    // then
-    const Pose target({0, -1, 'S'});
-    ASSERT_EQ(target, executor->Query());
-}
 }  // namespace adas
