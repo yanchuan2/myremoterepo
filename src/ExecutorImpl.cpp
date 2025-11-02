@@ -12,20 +12,24 @@ ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept : pose(pose)
 void ExecutorImpl::Execute(const std::string& commands) noexcept
 {
     for (int i = 0; i < (int)commands.size(); i++) {
-        // 前进功能
-        if (commands[i] == 'M') {
-            std::unique_ptr<Movecommand> cmder = std::make_unique<Movecommand>();
-            cmder->DoOperate(*this);
+        std::unique_ptr<ICommand> cmder;
+
+        if(commands[i]=='M')
+        {
+            cmder=std::make_unique<MoveCommand>();
         }
         else if(commands[i]=='L')
         {
-            std::unique_ptr<TurnLeftcommand> cmder = std::make_unique<TurnLeftcommand>();
-            cmder->DoOperate(*this);
+            cmder=std::make_unique<TurnLeftCommand>();
         }
         else if(commands[i]=='R')
         {
-            std::unique_ptr<TurnRightcommand> cmder = std::make_unique<TurnRightcommand>();
-            cmder->DoOperate(*this);
+            cmder=std::make_unique<TurnRightCommand>();
+        }
+
+        if(cmder)
+        {
+            cmder->DoOperate(*this);//最外层的函数是ExecutorImpl类型的指针调用的，所以*this是executor
         }
     }
     return;
