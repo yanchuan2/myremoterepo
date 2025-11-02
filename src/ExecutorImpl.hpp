@@ -14,11 +14,20 @@ public:
     void Execute(const std::string& command) noexcept override;
     Pose Query(void) const noexcept override;
 
+
 private:
     Pose pose;
     void Move(void) noexcept;
     void TurnLeft(void) noexcept;
     void TurnRight(void) noexcept;
+    class Movecommand final
+    {
+        public:
+        void DoOperate(ExecutorImpl &executor) const noexcept
+        {
+            executor.Move();
+        }
+    };
 };
-}  // namespace adas
+} // namespace adas
 // namespace adas
