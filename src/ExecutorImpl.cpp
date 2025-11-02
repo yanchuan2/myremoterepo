@@ -19,11 +19,13 @@ void ExecutorImpl::Execute(const std::string& commands) noexcept
         }
         else if(commands[i]=='L')
         {
-            TurnLeft();
+            std::unique_ptr<TurnLeftcommand> cmder = std::make_unique<TurnLeftcommand>();
+            cmder->DoOperate(*this);
         }
         else if(commands[i]=='R')
         {
-            TurnRight();
+            std::unique_ptr<TurnRightcommand> cmder = std::make_unique<TurnRightcommand>();
+            cmder->DoOperate(*this);
         }
     }
     return;

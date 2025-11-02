@@ -28,6 +28,22 @@ private:
             executor.Move();
         }
     };
+    class TurnLeftcommand final
+    {
+    public:
+        void DoOperate(ExecutorImpl& executor) const noexcept
+        {
+            executor.TurnLeft();
+        }
+    };
+    class TurnRightcommand final
+    {
+    public:
+        void DoOperate(ExecutorImpl& executor) const noexcept
+        {
+            executor.TurnRight();
+        }
+    };
 };
 } // namespace adas
 // namespace adas
