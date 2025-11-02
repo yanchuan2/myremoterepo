@@ -15,22 +15,54 @@ void ExecutorImpl::Execute(const std::string& commands) noexcept
         if (commands[i] == 'M') {
             Move();
         }
+        else if(commands[i]=='L')
+        {
+            TurnLeft();
+        }
+        else if(commands[i]=='R')
+        {
+            TurnRight();
+        }
     }
     return;
 }
 void ExecutorImpl::Move() noexcept
 {
-    if(pose.heading=='E'){
+    if (pose.heading == 'E') {
         ++pose.x;
-    }else if(pose.heading=='W'){
+    } else if (pose.heading == 'W') {
         --pose.x;
-    }else if(pose.heading=='N'){
+    } else if (pose.heading == 'N') {
         ++pose.y;
-    }else if(pose.heading=='S'){
+    } else if (pose.heading == 'S') {
         --pose.y;
     }
 }
-Pose ExecutorImpl::Query() const noexcept
+void ExecutorImpl::TurnLeft() noexcept
+{
+        if (pose.heading == 'N') {
+            pose.heading = 'W';
+        } else if (pose.heading == 'E') {
+            pose.heading = 'N';
+        } else if (pose.heading == 'S') {
+            pose.heading = 'E';
+        } else if (pose.heading == 'W') {
+            pose.heading = 'S';
+        }
+}
+void ExecutorImpl::TurnRight() noexcept
+{
+    if (pose.heading == 'N') {
+        pose.heading = 'E';
+    } else if (pose.heading == 'E') {
+        pose.heading = 'S';
+    } else if (pose.heading == 'S') {
+        pose.heading = 'W';
+    } else if (pose.heading == 'W') {
+        pose.heading = 'N';
+    }
+}
+ Pose ExecutorImpl::Query() const noexcept
 {
     return pose;
 }
