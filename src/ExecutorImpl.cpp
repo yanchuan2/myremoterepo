@@ -26,6 +26,11 @@ void ExecutorImpl::Execute(const std::string& commands) noexcept
         {
             cmder=std::make_unique<TurnRightCommand>();
         }
+        else if(commands[i]=='F')
+        {
+            cmder = std::make_unique<FastCommand>();
+        }
+
 
         if(cmder)
         {
@@ -70,7 +75,15 @@ void ExecutorImpl::TurnRight() noexcept
         pose.heading = 'N';
     }
 }
- Pose ExecutorImpl::Query() const noexcept
+void ExecutorImpl::Fast() noexcept
+{
+    fast=!fast;
+}
+bool ExecutorImpl::IsFast() const noexcept
+{
+    return fast;
+}
+Pose ExecutorImpl::Query() const noexcept
 {
     return pose;
 }
