@@ -1,12 +1,13 @@
 #include "ExecutorImpl.hpp"
 #include <memory>
+#include "Command.hpp"
 namespace adas
 {
 Executor* Executor::NewExecutor(const Pose& pose) noexcept
 {
     return new (std::nothrow) ExecutorImpl(pose);
 }
-ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept : pose(pose)
+ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept : poseHandler(pose)
 {
 }
 void ExecutorImpl::Execute(const std::string& commands) noexcept
@@ -34,7 +35,7 @@ void ExecutorImpl::Execute(const std::string& commands) noexcept
 
         if(cmder)
         {
-            cmder->DoOperate(*this);//最外层的函数是ExecutorImpl类型的指针调用的，所以*this是executor
+            cmder->DoOperate(poseHandler);//最外层的函数是ExecutorImpl类型的指针调用的，所以*this是executor
         }
     }
     return;
@@ -85,7 +86,7 @@ bool ExecutorImpl::IsFast() const noexcept
 }
 Pose ExecutorImpl::Query() const noexcept
 {
-    return pose;
+    return poseHandler.Query();
 }
 }  // namespace adas
 // namespace adas
