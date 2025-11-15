@@ -20,7 +20,8 @@ namespace adas
     //        }
     //        poseHandler.Move();
     //    }
-        const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+        void operator()(PoseHandler& poseHandler) const noexcept
+        {
             if (poseHandler.IsFast())
             {
                 poseHandler.Move();
@@ -39,7 +40,8 @@ namespace adas
     //        }
     //        poseHandler.TurnLeft();
     //    }
-        const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+        void operator()(PoseHandler& poseHandler) const noexcept
+        {
             if (poseHandler.IsFast()) {
                 poseHandler.Move();
             }
@@ -57,7 +59,8 @@ namespace adas
     //        }
     //        poseHandler.TurnRight();
     //    }
-        const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+        void operator()(PoseHandler& poseHandler) const noexcept
+        {
             if (poseHandler.IsFast()) {
                 poseHandler.Move();
             }
@@ -72,7 +75,8 @@ namespace adas
     //    {
     //        poseHandler.Fast();
     //    }
-        const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+        void operator()(PoseHandler& poseHandler) const noexcept
+        {
             poseHandler.Fast();
         };
     };
